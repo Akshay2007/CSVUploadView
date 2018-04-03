@@ -1,8 +1,8 @@
 Ext.onReady(function() {
   Ext.create('Ext.tab.Panel', {
     renderTo: Ext.getBody(),
-    height: 450,
-    width: 500,
+    height: 850,
+    width: 1000,
     items: [{
         xtype: 'panel',
         title: 'Tab One',
@@ -18,16 +18,37 @@ Ext.onReady(function() {
             id: 'monFileUpload',
             name: 'monFileUpload',
             buttonText: 'Upload',
+	          allowBlank: false,	
             tooltip: 'monFileUpload',
-          regex: /^.*\.(csv|CSV)$/,
-          regexText: 'Only CSV files allowed'
+          	regex: /^.*\.(csv|CSV)$/,
+          	regexText: 'Only CSV files allowed'
           },
           {xtype: 'button',
                 iconCls: 'bo', //your iconCls here
                 handler: function(){
                      var form = Ext.ComponentQuery.query('#monForm');
-                     console.log(form);
-		     debugger;
+                     
+                     if (form[0].form.isValid()) 
+                     {
+                     		alert("true");
+                        var officeDataStore = new Ext.data.JsonStore({
+                                        proxy: new Ext.data.HttpProxy({
+                                           url: 'www.googlr.jkjkij/users/listOffices/',
+                                           method: 'POST'
+                                        }),
+                                        root: 'results',
+                                        fields: ['offices_id', 'offices_name'],
+                                        autoLoad: true
+                                    })
+                        form[0].form.reset();
+                        
+                     }
+                     
+                     else
+                     {
+                     	alert("Enter a CSV file");
+                        form[0].form.reset();
+                     }
                 },
                 scope: this,
                 tooltip: 'horizontal ruler',
