@@ -1,4 +1,5 @@
 Ext.onReady(function() {
+  Ext.Loader.setConfig({enabled:true});
   Ext.create('Ext.tab.Panel', {
     renderTo: Ext.getBody(),
     height: 850,
@@ -24,23 +25,13 @@ Ext.onReady(function() {
           	regexText: 'Only CSV files allowed'
           },
           {xtype: 'button',
-                iconCls: 'bo', //your iconCls here
+                 text: 'Click me',
                 handler: function(){
                      var form = Ext.ComponentQuery.query('#monForm');
                      
                      if (form[0].form.isValid()) 
                      {
-                     		alert("true");
-                        var officeDataStore = new Ext.data.JsonStore({
-                                        proxy: new Ext.data.HttpProxy({
-                                           url: 'www.googlr.jkjkij/users/listOffices/',
-                                           method: 'POST'
-                                        }),
-                                        root: 'results',
-                                        fields: ['offices_id', 'offices_name'],
-                                        autoLoad: true
-                                    })
-                        form[0].form.reset();
+			form[0].form.submit({url: 'http://10.155.54.188:8080/upload'});
                         
                      }
                      
