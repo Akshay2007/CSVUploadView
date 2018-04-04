@@ -8,7 +8,7 @@ Ext.onReady(function() {
     width: 1000,
     items: [{
         xtype: 'panel',
-        title: 'Tab One',
+        title: 'Upload',
 
         items: [{
           xtype: 'form',
@@ -25,6 +25,7 @@ Ext.onReady(function() {
               regex: /^.*\.(csv|CSV)$/,
               regexText: 'Only CSV files allowed'
             },
+            
             {
               xtype: 'button',
               text: 'Save',
@@ -52,19 +53,12 @@ Ext.onReady(function() {
               tooltip: 'horizontal ruler',
               title: 'save',
               overflowText: 'horizontal ruler'
-            }
-          ]
+            }]
         }]
       },
       {
-        title: 'Tab Two',
+        title: 'Display',
         html: 'The second tab'
-      }
-    ],
-
-
-  });
-
-
-
+      }]
+	});
 });
