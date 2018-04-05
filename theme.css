@@ -1,3 +1,23 @@
 .x-panel-body{
     background-color: #e3e8ef;
 }
+
+#button-1014-btnInnerEl, #filefield-1013-buttonEl-btnInnerEl, #button-1017-btnInnerEl
+{
+	font-weight: bold;
+}
+#button-1017
+{
+left: 95.5%;
+}
+#displayfield-1025-labelCell
+{
+	width: 30px;
+	font-weight: bold;
+    	text-decoration: underline;
+    	padding-right: 5px;
+}
+#displayfield-1025-labelEl
+{
+	width: auto !important;
+}

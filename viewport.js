@@ -195,6 +195,12 @@ Ext.onReady(function() {
                 }
               ],
             height: 200
+            },
+            {
+                xtype: 'displayfield',
+                fieldLabel: 'Note',
+                name: 'home_score',
+                value: 'Please click on the refresh button to view the updated records'
             }
           ],
         }]
