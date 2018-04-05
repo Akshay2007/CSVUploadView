@@ -27,24 +27,26 @@ Ext.onReady(function() {
   Ext.Loader.setConfig({
     enabled: true
   });
-  Ext.create('Ext.tab.Panel', {
+  Ext.create('Ext.tab.Panel', {	
     renderTo: Ext.getBody(),
-    height: 850,
-    width: 1000,
+    fullscreen: true,
     items: [{
         xtype: 'panel',
-        title: 'Upload',
+        title: 'Upload File',
 
         items: [{
           xtype: 'form',
-          itemId: 'uploadForm',
+          itemId: 'uploadForm', 
+          height: 200,
+          margin: '75 50 50 570',
+          top: 100,
           border: false,
           fileUpload: true,
           items: [{
               xtype: 'fileuploadfield',
               itemId: 'fileUpload',
               name: 'file',
-              buttonText: 'Upload',
+              buttonText: 'Browse',
               allowBlank: false,
               tooltip: 'monFileUpload',
               regex: /^.*\.(csv|CSV)$/,
@@ -53,12 +55,14 @@ Ext.onReady(function() {
             
             {
               xtype: 'button',
-              text: 'Save',
+              text: 'Upload',
+              width: 70,
+              margin: '0 0 0 20',
               handler: function() {
                 var form = Ext.ComponentQuery.query('#uploadForm');
 
                 if (form[0].form.isValid()) form[0].getForm().submit({
-                  url: 'http://10.155.54.188:8080',
+                  url: 'abc',
                   waitMsg: 'Uploading Please Wait...',
                   method: 'POST',
                   success: function(r, a) {
