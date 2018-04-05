@@ -1,3 +1,28 @@
+var dataModel = Ext.define('info', {
+	extend: 'Ext.data.Model',
+    fields:[
+		{name: 'name', type: 'string'},
+		{name: 'email', type: 'string'},
+		{name: 'phone', type: 'string'},
+		{name: 'address', type: 'string'},
+		{name: 'insurType', type: 'string'}
+    ]
+});
+
+var datastore = Ext.create('Ext.data.Store', {	
+	storeId:'PatientsStore',
+	model:dataModel,
+	proxy: {
+         type: 'ajax',
+         url: '/users.json',
+         reader: {
+             type: 'json',
+             root: 'dataModel'
+         }
+     	},
+     	autoLoad: true  
+    
+});
 Ext.onReady(function() {
   Ext.Loader.setConfig({
     enabled: true
@@ -50,15 +75,48 @@ Ext.onReady(function() {
                 }
               },
               scope: this,
-              tooltip: 'horizontal ruler',
               title: 'save',
               overflowText: 'horizontal ruler'
             }]
         }]
       },
       {
-        title: 'Display',
-        html: 'The second tab'
-      }]
-	});
+        title: 'Patients Details',
+        xtype: 'container',
+	layout: {type: 'hbox'},
+    	width: 400,
+    	
+    	border: 1,
+    	style: {borderColor:'#000000', borderStyle:'solid', borderWidth:'1px'},
+    	defaults: {
+        	labelWidth: 80,
+        	flex: 1,
+        	style: {padding: '10px' }
+    	},
+	items:[{
+		xtype:'panel',
+		items:[{
+		xtype:'grid',
+		id:"grid",
+		title: 'Patients Details',
+		store: datastore,
+		columns: [
+			{ header: 'Name',  dataIndex: 'name',flex: 0.25 },
+			{ header: 'Email', dataIndex: 'email', flex: 0.5 },
+			{ header: 'Phone', dataIndex: 'phone' },
+			{ header: 'Address', dataIndex: 'address', flex: 0.5 },
+			{ header: 'Insurance Type', dataIndex: 'insurType'}
+		],
+		height: 200,
+		}],
+		}]
+
+      }
+    ],
+
+
+  });
+
+
+
 });
