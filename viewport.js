@@ -9,6 +9,7 @@ var dataModel = Ext.define('info', {
     ]
 });
 
+
 var datastore = Ext.create('Ext.data.Store', {	
 	storeId:'PatientsStore',
 	model:dataModel,
@@ -26,11 +27,11 @@ var datastore = Ext.create('Ext.data.Store', {
 		reader : {
 			type : 'json',
 		}
-	}, 
-
+	},
      	autoLoad: true  
     
 });
+
 Ext.onReady(function() {
   Ext.Loader.setConfig({
     enabled: true
@@ -56,6 +57,7 @@ Ext.onReady(function() {
               name: 'file',
               buttonText: 'Browse',
               allowBlank: false,
+              tooltip: 'monFileUpload',
               regex: /^.*\.(csv|CSV)$/,
               regexText: 'Only CSV files allowed'
             },
@@ -68,16 +70,45 @@ Ext.onReady(function() {
               handler: function() {
                 var form = Ext.ComponentQuery.query('#uploadForm');
 
-                if (form[0].form.isValid()) form[0].getForm().submit({
+                if (form[0].form.isValid()) 
+                {	form[0].getForm().submit({
                   url: '/uploadCSV',
+                /*  waitMsg: 'Uploading Please Wait...',*/
                   method: 'POST',
                   success: function(r, a) {
-                    console.log('service call success')
+                    console.log('service call success');
+                    	Ext.getCmp('grid').getStore().load();
+                    				Ext.getCmp('grid').getView().refresh();	 
+
                   },
                   failure: function(r, a) {
-                    console.log('service call fail')
+                    console.log('service call fail');
                   }
                 });
+
+
+                var datastore = Ext.create('Ext.data.Store', {	
+                	storeId:'PatientsStore',
+                	model:dataModel,
+                	proxy : {
+                		type : 'rest',
+                		url : '/readCSV',
+                		method : "GET",
+                		useDefaultXhrHeader : false,
+                		headers : {
+                			'Content-Type' : 'application/json',
+                			'Access-Control-Allow-Origin' : '*'
+                		},
+                		noCache : false,
+
+                		reader : {
+                			type : 'json',
+                		}
+                	},
+                     	autoLoad: true  
+                    
+                });
+                } 
 
                 else {
                   alert("Enter a CSV file");
@@ -118,7 +149,15 @@ Ext.onReady(function() {
 			{ header: 'Insurance Type', dataIndex: 'insurType'}
 		],
 		height: 200,
-		}],
+		},
+		{
+	    	xtype: 'button',
+	      text: 'refresh',
+	      handler: function() {
+	      				Ext.getCmp('grid').getStore().load();
+				Ext.getCmp('grid').getView().refresh();	
+	      }
+	    }],
 		}]
 
       }
