@@ -12,14 +12,22 @@ var dataModel = Ext.define('info', {
 var datastore = Ext.create('Ext.data.Store', {	
 	storeId:'PatientsStore',
 	model:dataModel,
-	proxy: {
-         type: 'ajax',
-         url: '/users.json',
-         reader: {
-             type: 'json',
-             root: 'dataModel'
-         }
-     	},
+	proxy : {
+		type : 'rest',
+		url : '/readCSV',
+		method : "GET",
+		useDefaultXhrHeader : false,
+		headers : {
+			'Content-Type' : 'application/json',
+			'Access-Control-Allow-Origin' : '*'
+		},
+		noCache : false,
+
+		reader : {
+			type : 'json',
+		}
+	}, 
+
      	autoLoad: true  
     
 });
@@ -48,7 +56,6 @@ Ext.onReady(function() {
               name: 'file',
               buttonText: 'Browse',
               allowBlank: false,
-              tooltip: 'monFileUpload',
               regex: /^.*\.(csv|CSV)$/,
               regexText: 'Only CSV files allowed'
             },
@@ -62,8 +69,7 @@ Ext.onReady(function() {
                 var form = Ext.ComponentQuery.query('#uploadForm');
 
                 if (form[0].form.isValid()) form[0].getForm().submit({
-                  url: 'abc',
-                  waitMsg: 'Uploading Please Wait...',
+                  url: '/uploadCSV',
                   method: 'POST',
                   success: function(r, a) {
                     console.log('service call success')
