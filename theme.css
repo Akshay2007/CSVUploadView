@@ -1,23 +1,22 @@
 .x-panel-body{
     background-color: #e3e8ef;
 }
-
-#button-1014-btnInnerEl, #filefield-1013-buttonEl-btnInnerEl, #button-1017-btnInnerEl
-{
-	font-weight: bold;
-}
-#button-1017
+.refresh-button
 {
 left: 95.5%;
 }
-#displayfield-1025-labelCell
+.note-for-refresh tbody tr td:first-of-type label
 {
-	width: 30px;
+	width: 30px !important;
 	font-weight: bold;
     	text-decoration: underline;
-    	padding-right: 5px;
+	margin-right: 0px !important;
 }
-#displayfield-1025-labelEl
+.note-for-refresh tbody tr td:last-of-type
 {
-	width: auto !important;
+	width: auto;
+}
+.note-for-refresh tbody tr td:first-of-type
+{
+	width: 35px !important;
 }

@@ -160,6 +160,7 @@ Ext.onReady(function() {
           items: [{
               xtype: 'button',
               text: 'Refresh',
+	      cls: 'refresh-button',
               handler: function() {
                 Ext.getCmp('grid').getStore().load();
                 Ext.getCmp('grid').getView().refresh();
@@ -199,7 +200,9 @@ Ext.onReady(function() {
             {
                 xtype: 'displayfield',
                 fieldLabel: 'Note',
+		fieldLabelCls: 'class-for-refresh-field',
                 name: 'home_score',
+		cls:'note-for-refresh',
                 value: 'Please click on the refresh button to view the updated records'
             }
           ],
