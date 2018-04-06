@@ -3,8 +3,16 @@
 }
 .refresh-button
 {
-left: 95.5%;
+	left: 95.5%;
 }
+
+.refresh-button em:first-of-type button span:first-of-type, 
+.upload-button em:first-of-type button span:first-of-type,
+.upload-field tbody tr td:last-of-type table tbody tr td:last-of-type div em:first-of-type button span:first-of-type
+{
+	font-weight: bold
+}
+
 .note-for-refresh tbody tr td:first-of-type label
 {
 	width: 30px !important;

@@ -68,6 +68,7 @@ Ext.onReady(function() {
           items: [{
               xtype: 'fileuploadfield',
               itemId: 'fileUpload',
+	      cls: 'upload-field',
               name: 'file',
               buttonText: 'Browse',
               allowBlank: false,
@@ -79,6 +80,7 @@ Ext.onReady(function() {
             {
               xtype: 'button',
               text: 'Upload',
+	      cls: 'upload-button',	
               width: 70,
               handler: function() {
                 var form = Ext.ComponentQuery.query('#uploadForm');
